@@ -9,7 +9,7 @@ RUN apt-get install -y \
         nodejs npm \
         ruby ruby-dev \
         build-essential \
-        mysql-client postgresql-client sqlite3 \
+        libmysqlclient-dev mysql-client postgresql-client sqlite3 \
         --no-install-recommends
 RUN rm -rf /var/lib/apt/lists/*
 
