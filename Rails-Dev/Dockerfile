@@ -3,9 +3,17 @@ MAINTAINER Hu Ziming <hzmangel@gmail.com>
 
 # Replace to CHN mirror, since the default httpredir is not working on this fancied land
 RUN sed -i.orig 's/httpredir.debian.org/mirrors.163.com/g' /etc/apt/sources.list
-RUN apt-get update && apt-get install -y nodejs npm ruby ruby-dev --no-install-recommends && rm -rf /var/lib/apt/lists/*
+RUN sed 's#security.debian.org#mirrors.163.com/debian-security#g' /etc/apt/sources.list
+RUN apt-get update && apt-get install -y nodejs npm ruby ruby-dev build-essential --no-install-recommends && rm -rf /var/lib/apt/lists/*
+
+# Change to use Taobao mirror
+RUN gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
+RUN echo 'gem: --no-document' >> ~/.gemrc
+
+# Rails related
+RUN gem install rails bundler
 
 # Install bower for rails-bower gem, and enable root to run bower command
-RUN npm install -g bower
+RUN npm install -g bower --registry=https://registry.npm.taobao.org
 RUN echo '{ "allow_root": true }' > ~/.bowerrc
 
