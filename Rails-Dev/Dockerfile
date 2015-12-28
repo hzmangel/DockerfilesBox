@@ -5,3 +5,7 @@ MAINTAINER Hu Ziming <hzmangel@gmail.com>
 RUN sed -i.orig 's/httpredir.debian.org/mirrors.163.com/g' /etc/apt/sources.list
 RUN apt-get update && apt-get install -y nodejs npm ruby ruby-dev --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
+# Install bower for rails-bower gem, and enable root to run bower command
+RUN npm install -g bower
+RUN echo '{ "allow_root": true }' > ~/.bowerrc
+
