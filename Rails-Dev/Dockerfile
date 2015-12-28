@@ -4,7 +4,15 @@ MAINTAINER Hu Ziming <hzmangel@gmail.com>
 # Replace to CHN mirror, since the default httpredir is not working on this fancied land
 RUN sed -i.orig 's/httpredir.debian.org/mirrors.163.com/g' /etc/apt/sources.list
 RUN sed 's#security.debian.org#mirrors.163.com/debian-security#g' /etc/apt/sources.list
-RUN apt-get update && apt-get install -y nodejs npm ruby ruby-dev build-essential --no-install-recommends && rm -rf /var/lib/apt/lists/*
+RUN apt-get update
+RUN apt-get install -y \
+        nodejs npm \
+        ruby ruby-dev \
+        build-essential \
+        mysql-client postgresql-client sqlite3 \
+        --no-install-recommends
+RUN rm -rf /var/lib/apt/lists/*
+
 
 # Change to use Taobao mirror
 RUN gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
