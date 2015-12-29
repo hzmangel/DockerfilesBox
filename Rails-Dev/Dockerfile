@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM ruby:2.2
 MAINTAINER Hu Ziming <hzmangel@gmail.com>
 
 # Replace to CHN mirror, since the default httpredir is not working on this fancied land
@@ -7,7 +7,6 @@ RUN sed -i.orig 's#security.debian.org#mirrors.163.com/debian-security#g' /etc/a
 RUN apt-get update
 RUN apt-get install -y \
         nodejs npm \
-        ruby ruby-dev \
         build-essential \
         libmysqlclient-dev mysql-client postgresql-client sqlite3 \
         --no-install-recommends
