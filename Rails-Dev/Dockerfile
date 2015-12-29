@@ -11,6 +11,7 @@ RUN apt-get install -y \
         build-essential \
         libmysqlclient-dev mysql-client postgresql-client sqlite3 \
         --no-install-recommends
+RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN rm -rf /var/lib/apt/lists/*
 
 
